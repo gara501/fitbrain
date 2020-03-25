@@ -1,0 +1,179 @@
+body {
+  background: url('./images/greynoise.jpg') fixed;
+}
+
+html {  
+  font-family: 'Roboto', sans-serif;
+  font-size: min(max(16px, 4vw), 22px);
+}
+
+.title {
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+}
+
+.logo {
+  width: 100px;
+}
+
+.intro {
+  align-items: center;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.description {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  margin: 20px 0;
+  padding: 10px 0;
+}
+
+.description button {
+  font-size: 1rem;
+  margin: 10px 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.calculation {
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.response {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  transform: scaleY(1);
+  transition: all 300ms ease;
+}
+
+.response .subtitle {
+  width: 100%;
+}
+
+.response button {
+  flex: 1;
+  font-size: 1.3rem;
+  margin: 0 10px;
+}
+
+.hidden {
+  transform: scaleY(0);
+}
+
+.exercises {
+  border: 1px solid #ced7d0;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.exercises h3 {
+  font-size: 1.2rem;
+}
+
+.levels {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.levels button {
+  flex: 1;
+  margin: 5px;
+}
+
+.music {
+  margin: 20px 0;
+}
+
+.musicplayer {
+  height: 85px;
+  width: 100%;
+}
+
+.exercise-images {
+  height: 250px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.exercise-images img {
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: -1;
+  animation: 1s example infinite;
+  width: auto;
+}
+
+.exercise-images img.active {
+  z-index: 1;
+}
+
+
+@media screen and (min-width: 1024px) {
+  .intro {
+    margin-top: 50px;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+
+  .description {   
+    margin: 20px 0;
+    padding: 20px 0;
+  }
+
+  .description button {
+    font-size: 2rem;
+    margin: 20px 0;
+  }
+
+  .levels button {
+    margin: 0 10px;
+  }
+
+  .response button {
+    font-size: 2rem;
+  }
+  
+  .exercises {
+    margin: 30px 0;
+  }
+
+  .exercises h3 {
+    font-size: 2rem;
+  }
+
+  .music {
+    margin: 0;
+  }
+
+  .musicplayer {
+    height: 100px;
+    width: 70%;
+  }
+
+  .exercise-images {
+    margin-bottom: 0px;
+  }
+
+}
