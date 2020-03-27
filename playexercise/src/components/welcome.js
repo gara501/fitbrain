@@ -214,8 +214,6 @@ const Welcome = () => {
             </Col>
             <Col xs="4" md="4" lg="4" className="info-bl p-1">
               <a onClick={handleShow} data-modal="copy" href="/">Copyright</a>
-            </Col>
-            <Col xs="12" md="12" lg="12" className="info-bl p-3">
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>{modal.title}</Modal.Title>
@@ -231,27 +229,27 @@ const Welcome = () => {
               </Modal>
             </Col>
           </Row>
-          <Row className="mv-2">
-            <Col xs="12" md="12" lg="12">
+          <Row className="mv-5">
+            <Col xs="12" md="12" lg="6">
               <div className="card-container p-2">
                 <h1 className="title">Fitbrain</h1>
                 <h4 className="label">Select Difficult level</h4>
                 <div className="levels">
-                  <Button onClick={selectLevel} variant="secondary" value="1" type="button">Easy</Button>
-                  <Button onClick={selectLevel} variant="info" value="2" type="button">Medium</Button>
-                  <Button onClick={selectLevel} variant="success" value="3" type="button">Hard</Button>
-                  <Button onClick={selectLevel} variant="warning" value="4" type="button">Super Hard</Button>
-                  <Button onClick={selectLevel} variant="danger" value="5" type="button">Impossible</Button>
-                </div>
-                <div className="label-footer p-1 mt-4">
-                  {level && <p>Level selected: {level}</p>}
+                  <Button onClick={selectLevel} value="1" type="button">Easy</Button>
+                  <Button onClick={selectLevel} value="2" type="button">Medium</Button>
+                  <Button onClick={selectLevel} value="3" type="button">Hard</Button>
+                  <Button onClick={selectLevel} value="4" type="button">Super Hard</Button>
+                  <Button onClick={selectLevel} value="5" type="button">Impossible</Button>
                 </div>
               </div>
             </Col>
-          </Row>
-          <Row className="app-block">
-            <Col xs="12" md="12" lg="12">
-              <Button onClick={startGame} className="fullw btnstart" type="button">Start</Button>
+            <Col xs="12" md="12" lg="6">
+                <div className="label-footer">
+                  <div className="card-container p-2">
+                    {level && <p>Level selected: {level}</p>}
+                    <Button onClick={startGame} variant="success" className="fullw btnstart" type="button">Start</Button>
+                  </div>
+                </div>
             </Col>
           </Row>
         </div>

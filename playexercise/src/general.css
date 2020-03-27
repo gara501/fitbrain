@@ -24,7 +24,6 @@ a {
 
 .wrapper {
   height: 100vh;
-  overflow: hidden;
   position: relative;
 }
 
@@ -41,7 +40,6 @@ a {
 
 .cardblock {
   border: 1px solid var(--color-lightgray);
-  background: var(--color-lightgray);
   color: var(--color-darkblue);
   border-radius: 10px;
   overflow: hidden;
@@ -51,7 +49,7 @@ a {
 .card-container {
   border: 1px solid var(--color-lightgray);
   border-left: 2px solid var(--color-orange);
-  box-shadow: 11px -8px 22px -17px rgba(0,0,0,0.75);
+  box-shadow: 10px 24px 34px -26px rgba(0,0,0,0.75)
 }
 
 .info-bl {
@@ -186,10 +184,7 @@ a {
 
 .response button:focus,
 .response button:active {
-  border: none;
-  color: var(--color-white);
-  background: var(--color-blue);
-  text-shadow: 0 -1px 4px var(--color-white), 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+  background: var(--color-salmon);
 }
 
 .hidden {
@@ -215,10 +210,31 @@ a {
 
 .levels button {
   border: 1px solid var(--color-lightgray);
+  background-color: var(--color-salmon);
   font-family: var(--font-ubuntu);
-  font-size: 1.2rem;
-  height: 70px;
+  font-size: 1.5rem;
+  height: 60px;
   width: 100%;
+}
+
+.levels button:nth-last-of-type(5) {
+  background-color: #e06565;
+}
+
+.levels button:nth-last-of-type(4) {
+  background-color: #d15e5e;
+}
+
+.levels button:nth-last-of-type(3) {
+  background-color: #ba4747;
+}
+
+.levels button:nth-last-of-type(2) {
+  background-color: #ad3232;
+}
+
+.levels button:nth-last-of-type(1) {
+  background-color: #a82222;
 }
 
 .label-header {
@@ -257,7 +273,7 @@ a {
 }
 
 .exercise-images {
-  height: 230px;
+  min-height: 160px;
   margin-bottom: 10px;
   position: relative;
 }
@@ -329,7 +345,7 @@ a {
 .btn.btnstart {
   font-family: var(--font-ubuntu);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
 }
 
@@ -340,20 +356,16 @@ a {
 }
 
 @media screen and (min-width: 1024px) {
-  .intro {
-    margin-top: 50px;
-  }
-
   .calculation {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .title {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .subtitle {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .logo {
@@ -371,7 +383,7 @@ a {
   }
 
   .response button {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .music {
@@ -384,7 +396,7 @@ a {
   }
 
   .exercise-images {
-    height: 300px;
+    height: 150px;
     margin-bottom: 0px;
   }
 
@@ -394,6 +406,19 @@ a {
 
   .levels .label {
     width: auto;
+  }
+
+  .levels button {
+    font-size: 1rem;
+    height: 50px;
+  }
+
+  .btn.btnstart {
+    font-size: 1rem;
+  }
+
+  .exercise-info {
+    min-height: 150px;
   }
 
 }

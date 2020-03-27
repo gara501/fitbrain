@@ -53,15 +53,15 @@ const Exercise = ({ penalty, getExercise, isRunning=true }) => {
   return (
     <div className="exercises mv-2">
     <Row>
-      <Col xs="12" md="12" lg="12">
+      <Col xs="12" md="12" lg="6">
         <div className="exercise-images card-container">
           {itemex.images.map((item, index) => (
             <img alt="ex" className={ active === index ? 'active' : '' } data-index={index} key={index} src={item.src} />
           ))}
         </div>
       </Col>
-      <Col xs="12" md="12" lg="12">
-        <div className="card-container p-3">
+      <Col xs="12" md="12" lg="6">
+        <div className="card-container p-3 exercise-info">
           <h2 className="subtitle space-vertical-2">{itemex.name}</h2>
           {penalty === 0 &&
               <div>
