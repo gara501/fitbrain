@@ -3,7 +3,6 @@ import { Row, Col, Alert} from 'react-bootstrap';
 import exercises from '../data/exercises.json';
 
 const Exercise = ({ penalty, getExercise, isRunning=true }) => {
-  
   const [itemex, setItemex] = useState({
     name: '',
     images: [],
@@ -25,8 +24,11 @@ const Exercise = ({ penalty, getExercise, isRunning=true }) => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {  
-    if (active > itemex.images.length) {
+  useEffect(() => {
+    console.log(active);
+    console.log(itemex.images);
+
+    if ((active+1) >= itemex.images.length) {
       setActive(() => 0);
     } else {
       setActive(() => active+1);
@@ -35,12 +37,8 @@ const Exercise = ({ penalty, getExercise, isRunning=true }) => {
     if (isRunning) {
       setfinalreps(() => seconds);
     }
-  
+
   }, [seconds, isRunning]);
-    
-  useEffect(() => {
-    console.log('VARIABLE');
-  }, [penalty]);
 
   useEffect(() => {
     getRandomExercise();
@@ -53,27 +51,31 @@ const Exercise = ({ penalty, getExercise, isRunning=true }) => {
   }
 
   return (
-    <div className="exercises">
+    <div className="exercises mv-2">
     <Row>
-      <Col xs="12" md="6" lg="6">
-        <div className="exercise-images">
+      <Col xs="12" md="12" lg="12">
+        <div className="exercise-images card-container">
           {itemex.images.map((item, index) => (
-            <img alt="ex" className={ active === index ? 'active' : '' } key={index} src={item.src} />
+            <img alt="ex" className={ active === index ? 'active' : '' } data-index={index} key={index} src={item.src} />
           ))}
         </div>
       </Col>
-      <Col xs="12" md="6" lg="6">
-          <h2 className="subtitle">{itemex.name}</h2>
-          {penalty === 0 && <Alert variant="success">
-            <Alert.Heading># of Reps</Alert.Heading>
-              <p>Do: {itemex.reps + finalreps}</p>
-            </Alert>}
-          {penalty > 0 && <Alert variant="danger">
-            <Alert.Heading>You Fail</Alert.Heading>
-              <p>
-                Total reps to do: {itemex.reps + finalreps + penalty}
-              </p>
-            </Alert>}
+      <Col xs="12" md="12" lg="12">
+        <div className="card-container p-3">
+          <h2 className="subtitle space-vertical-2">{itemex.name}</h2>
+          {penalty === 0 &&
+              <div>
+                <p className="reps-label">Reps to do: {itemex.reps + finalreps}</p>
+              </div>
+            }
+          {penalty > 0 &&
+              <div>
+                <p className="reps-label penalty-label">
+                  Reps to do: {itemex.reps + finalreps + penalty}
+                </p>
+              </div>
+            }
+        </div>
       </Col>
     </Row>
     </div>

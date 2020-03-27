@@ -1,15 +1,131 @@
-body {
-  background: url('./images/greynoise.jpg') fixed;
+:root {
+  --color-lightgray: #f5f5f6;
+  --color-orange: #f36452;
+  --color-darkblue: #1f2f41;
+  --color-brown: #A16748;
+  --color-gray: #a6a9af;
+  --color-salmon: #f47f6d;
+  --color-white: #FFF;
+  --font-ubuntu: 'Ubuntu', sans-serif;
 }
 
-html {  
+body {
+  background: var(--color-white);
+}
+
+html {
   font-family: 'Roboto', sans-serif;
   font-size: min(max(16px, 4vw), 22px);
 }
 
+a {
+  transition: all 300ms ease;
+}
+
+.wrapper {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide1,
+.slide2 {
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  transition: all 300ms ease-in;
+  width: 100%;
+  z-index: 1;
+}
+
+.cardblock {
+  border: 1px solid var(--color-lightgray);
+  background: var(--color-lightgray);
+  color: var(--color-darkblue);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-container {
+  border: 1px solid var(--color-lightgray);
+  border-left: 2px solid var(--color-orange);
+  box-shadow: 11px -8px 22px -17px rgba(0,0,0,0.75);
+}
+
+.info-bl {
+  color: var(--color-gray);
+  font-family: var(--font-ubuntu);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.info-bl a {
+  color: var(--color-gray);
+}
+
+.info-bl a:hover {
+  color: var(--color-orange);
+}
+
+.info-bl a::before {
+  content: '+ ';
+}
+
+.info-b {
+  background: var(--color-lightgray);
+  color: var(--color-pink);
+  text-align: center;
+}
+
+.info-b a {
+  color: var(--color-pink);
+}
+
+.info-b a:hover {
+  color: var(--color-blue);
+}
+
+.info-c {
+  background: var(--color-blue);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.info-c a {
+  color: var(--color-gray);
+}
+
+.info-c a::before {
+  content: '+ ';
+}
+
+.info-c a:hover {
+  color: var(--color-orange);
+}
+
+.info-a,
+.info-b,
+.info-c {
+  align-items: center;
+}
+
+.info-a p,
+.info-b p,
+.info-c p {
+  margin: 0;
+}
+
+.info-container,
+.app-container {
+  height: 100vh;
+}
+
 .title {
-  font-family: 'Anton', sans-serif;
+  font-family: var(--font-ubuntu);
   font-size: 2rem;
+  text-align: center;
 }
 
 .subtitle {
@@ -26,11 +142,11 @@ html {
   text-align: center;
 }
 
-.description {
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
-  margin: 20px 0;
-  padding: 10px 0;
+.block {
+  border-bottom: 1px solid #ced7d0;
+  border-top: 1px solid #ced7d0;
+  margin: 10px 0;
+  padding: 20px 0;
 }
 
 .description button {
@@ -41,8 +157,9 @@ html {
 }
 
 .calculation {
-  font-family: 'Anton', sans-serif;
-  font-size: 3rem;
+  font-family: var(--font-ubuntu);
+  font-size: 1.5rem;
+  margin: 0;
   text-align: center;
 }
 
@@ -50,8 +167,6 @@ html {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  transform: scaleY(1);
-  transition: all 300ms ease;
 }
 
 .response .subtitle {
@@ -59,34 +174,77 @@ html {
 }
 
 .response button {
+  background: var(--color-salmon);
+  border: none;
+  color: var(--color-white);
+  font-weight: 600;
   flex: 1;
-  font-size: 1.3rem;
-  margin: 0 10px;
+  font-size: 1.5rem;
+  text-shadow: 0 -1px 4px var(--color-white), 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+  margin: 5px;
+}
+
+.response button:focus,
+.response button:active {
+  border: none;
+  color: var(--color-white);
+  background: var(--color-blue);
+  text-shadow: 0 -1px 4px var(--color-white), 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
 }
 
 .hidden {
-  transform: scaleY(0);
+  opacity: 0;
+  z-index: -10;
+}
+
+.small-title {
+  color: var(--color-gray);
+  margin: 0;
 }
 
 .exercises {
-  border: 1px solid #ced7d0;
-  margin: 20px 0;
-  padding: 20px;
-}
-
-.exercises h3 {
-  font-size: 1.2rem;
+  background: var(--color-white);
 }
 
 .levels {
+  align-items: center;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
+  flex-flow: column wrap;
+  justify-content: center;
 }
 
 .levels button {
-  flex: 1;
-  margin: 5px;
+  border: 1px solid var(--color-lightgray);
+  font-family: var(--font-ubuntu);
+  font-size: 1.2rem;
+  height: 70px;
+  width: 100%;
+}
+
+.label-header {
+  background: var(--color-lightgray);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.label-footer {
+  color: var(--color-orange);
+  font-size: 1.2rem;
+  font-family: var(--font-ubuntu);
+  text-align: center;
+}
+
+.label-footer p {
+  margin: 0;
+  padding: 0;
+}
+
+.label {
+  color: var(--color-darkblue);
+  font-size: 1rem;
+  font-family: var(--font-ubuntu);
+  text-align: center;
+  width: 100%;
 }
 
 .music {
@@ -99,8 +257,8 @@ html {
 }
 
 .exercise-images {
-  height: 250px;
-  margin-bottom: 20px;
+  height: 230px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -119,10 +277,75 @@ html {
   z-index: 1;
 }
 
+.info-block {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.info-block .info {
+  font-size: 1rem;
+  width: 100%;
+}
+
+.reps-label {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.penalty-label {
+  color: var(--color-pink);
+}
+
+.success-label {
+  color: var(--color-blue);
+}
+
+.alert-result {
+  background: var(--color-lightgray);
+  color: var(--color-darkblue);
+  display: flex;
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 55px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.alert-result.error {
+  color: var(--color-orange);
+}
+
+.alert-result > p {
+  font-family: var(--font-ubuntu);
+  margin: 12px;
+}
+
+.alert-result > button {
+  height: 100%;
+}
+
+.btn.btnstart {
+  font-family: var(--font-ubuntu);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.timer {
+  color: var(--color-salmon);
+  font-family: var(--font-ubuntu);
+  font-weight: bold;
+}
 
 @media screen and (min-width: 1024px) {
   .intro {
     margin-top: 50px;
+  }
+
+  .calculation {
+    font-size: 3rem;
   }
 
   .title {
@@ -132,12 +355,12 @@ html {
   .subtitle {
     font-size: 2rem;
   }
-  
+
   .logo {
     width: 150px;
   }
 
-  .description {   
+  .description {
     margin: 20px 0;
     padding: 20px 0;
   }
@@ -147,19 +370,7 @@ html {
     margin: 20px 0;
   }
 
-  .levels button {
-    margin: 0 10px;
-  }
-
   .response button {
-    font-size: 2rem;
-  }
-  
-  .exercises {
-    margin: 30px 0;
-  }
-
-  .exercises h3 {
     font-size: 2rem;
   }
 
@@ -173,7 +384,16 @@ html {
   }
 
   .exercise-images {
+    height: 300px;
     margin-bottom: 0px;
+  }
+
+  .info-block .info {
+    width: 45%;
+  }
+
+  .levels .label {
+    width: auto;
   }
 
 }
