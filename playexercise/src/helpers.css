@@ -71,3 +71,30 @@
 .fullw {
   width: 100%;
 }
+
+.btn-base {
+  background-color: var(--color-orange);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 9px 14px -9px rgba(0,0,0,0.75);
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 5px 20px;
+  transition: all 300ms ease;
+  text-transform: uppercase;
+}
+
+.btn-base:hover,
+.btn-base:active {
+  opacity: .9;
+}
+
+.btn-orange {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+}
+
+.btn-dark {
+  background-color: var(--color-darkblue);
+  color: var(--color-white);
+}

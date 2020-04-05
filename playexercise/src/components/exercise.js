@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Row, Col, Alert} from 'react-bootstrap';
+import { Row, Col} from 'react-bootstrap';
 import exercises from '../data/exercises.json';
 
 const Exercise = ({ penalty, getExercise, isRunning=true }) => {

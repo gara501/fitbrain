@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Exercise from './exercise';
 import Timer from './timer';
+import Header from './header';
 import { evaluate } from 'mathjs'
-import {Button, Container, Row, Col, Badge, Modal} from 'react-bootstrap';
-import logo from '../images/aramfit.png';
+import {Button, Container, Row, Col, Modal} from 'react-bootstrap';
 
 const Welcome = () => {
   const [calculation, setCalculation] = useState('');
@@ -19,6 +19,7 @@ const Welcome = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [slide1, setSlide1] = useState('');
   const [slide2, setSlide2] = useState('hidden');
+  const [slide3, setSlide3] = useState('hidden');
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState({
     title: '',
@@ -125,8 +126,7 @@ const Welcome = () => {
     setRandomExercise(getRandomNumber(45));
     setIsRunning(true);
     setPenalty(0);
-    setSlide2('');
-    setSlide1('hidden');
+    selectSlide('slide2');
   }
 
   const nextExercise = () => {
@@ -136,16 +136,17 @@ const Welcome = () => {
     setRandomExercise(getRandomNumber(45));
     setIsRunning(true);
     setPenalty(0);
+    selectSlide('slide2');
   }
 
   const returnToIntro = () => {
-    setSlide2('hidden');
-    setSlide1('');
+    selectSlide('slide1');
     setIsRunning(false);
   }
 
   const selectLevel = (e) => {
     setLevel(e.target.value)
+    startGame();
   }
 
   const selectAnswer = (e) => {
@@ -154,16 +155,37 @@ const Welcome = () => {
     if (isRunning) {
       if (+selectedValue !== +opresult) {
         setBadge('danger');
-        setAnswer('Error!');
+        setAnswer('Error, try harder!');
         setPenalty(10);
       } else {
         setBadge('success');
-        setAnswer('Excellent!');
+        setAnswer('Correct!');
         setPenalty(0);
       }
     }
-
+    selectSlide('slide3');
     setIsRunning(false);
+  }
+
+  const selectSlide = (slide) => {
+    // eslint-disable-next-line default-case
+    switch (slide) {
+      case 'slide1':
+        setSlide1('');
+        setSlide2('hidden');
+        setSlide3('hidden');
+        break;
+      case 'slide2':
+        setSlide1('hidden');
+        setSlide2('');
+        setSlide3('hidden');
+        break;
+      case 'slide3':
+        setSlide1('hidden');
+        setSlide2('hidden');
+        setSlide3('');
+        break;
+    };
   }
 
   const handleClose = () => setShow(false);
@@ -174,9 +196,8 @@ const Welcome = () => {
     if (btnModal === 'howto') {
       setModal({
         title: 'How To Play',
-        message: `A random math problem will be shown after you start and a random exercise will be selected, this exercise
-        has a base number of repetitions, this number will increase each second you take to solve the math problem.
-        If you fail your response, you will be penalized with 10 extra repetitions.`
+        message: `Select level of difficulty, resolve the math ecuation, do the proposed exercise,
+        each second you take to answer will increase number or repetitions, if you fail, you will be penalized with 10 reps more.`
       });
     } else if(btnModal === 'disclaimer') {
       setModal({
@@ -197,14 +218,7 @@ const Welcome = () => {
     <Container>
       <div className="wrapper">
         <div className={slide1 + ' slide1'}>
-          <Row className="justify-content-center intro">
-            <Col xs="4" md="6" lg="6">
-              <img className="logo" src={logo} alt="aramfit" />
-            </Col>
-            <Col xs="8" md="6" lg="6" className="music">
-              <iframe title="music" className="musicplayer" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/10373213&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-            </Col>
-          </Row>
+          <Header />
           <Row className="mv-2">
             <Col xs="4" md="4" lg="4" className="info-bl p-1">
               <a onClick={handleShow} data-modal="howto" href="/">How to Play</a>
@@ -230,42 +244,38 @@ const Welcome = () => {
             </Col>
           </Row>
           <Row className="mv-5">
-            <Col xs="12" md="12" lg="6">
+            <Col xs="12" md="12" lg="12">
               <div className="card-container p-2">
                 <h1 className="title">Fitbrain</h1>
-                <h4 className="label">Select Difficult level</h4>
+                <h4 className="label mv-2">Select Difficult level</h4>
                 <div className="levels">
-                  <Button onClick={selectLevel} value="1" type="button">Easy</Button>
-                  <Button onClick={selectLevel} value="2" type="button">Medium</Button>
-                  <Button onClick={selectLevel} value="3" type="button">Hard</Button>
-                  <Button onClick={selectLevel} value="4" type="button">Super Hard</Button>
-                  <Button onClick={selectLevel} value="5" type="button">Impossible</Button>
+                  <button onClick={selectLevel} value="1" className="btn-level" type="button">Basic</button>
+                  <button onClick={selectLevel} value="2" className="btn-level" type="button">Easy</button>
+                  <button onClick={selectLevel} value="3" className="btn-level" type="button">Medium</button>
+                  <button onClick={selectLevel} value="4" className="btn-level" type="button">Hard</button>
+                  <button onClick={selectLevel} value="5" className="btn-level" type="button">Impossible</button>
+                </div>
+                <div className="label-footer">
+                  {level && <p>Level selected: {level}</p>}
                 </div>
               </div>
-            </Col>
-            <Col xs="12" md="12" lg="6">
-                <div className="label-footer">
-                  <div className="card-container p-2">
-                    {level && <p>Level selected: {level}</p>}
-                    <Button onClick={startGame} variant="success" className="fullw btnstart" type="button">Start</Button>
-                  </div>
-                </div>
             </Col>
           </Row>
         </div>
         <div className={slide2 + ' slide2'}>
-          <Row className="justify-content-center intro">
-            <Col xs="4" md="6" lg="6">
-              <img className="logo" src={logo} alt="aramfit" />
-            </Col>
-            <Col xs="8" md="6" lg="6" className="music">
-              <iframe title="music" className="musicplayer" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/10373213&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+          <Header />
+          <Row>
+            <Col xs= "12" md="12" lg="12">
+              <div className="card-container p-2">
+                {isStarted && <Timer />}
+                <button onClick={returnToIntro} className="fullw  btn-base btn-orange" value="1" type="button">Restart</button>
+              </div>
             </Col>
           </Row>
           <Row className="cardblock">
             <Col xs= "12" md="12" lg="12">
               <div className="card-container bg-w p-2 mv-2">
-                <p className="small-title">Resolve</p>
+                <p className="small-title">What is the value of this?</p>
                 <p className="calculation">{calculation}</p>
               </div>
             </Col>
@@ -273,11 +283,7 @@ const Welcome = () => {
           <Row>
             <Col xs="12" md="12" lg="12">
               <div className="card-container p-2">
-                <p className="small-title">Answers:</p>
-                {answer && <div className={(penalty > 0 ? 'alert-result error': 'alert-result')}>
-                  <p>{answer}</p>
-                  <Button onClick={nextExercise} variant="success" value="1" type="button">Next Exercise</Button>
-                </div>}
+                <p className="small-title">Select the correct answer:</p>
                 {!answer &&
                   <div className="response">
                     { response.map((item, index) => (
@@ -287,22 +293,31 @@ const Welcome = () => {
                 }
               </div>
             </Col>
-              <Col xs="12" md="12" lg="12">
-              <div>
-                <Exercise getExercise={randomExercise} penalty={penalty} isRunning={isRunning} />
-              </div>
-            </Col>
           </Row>
+        </div>
+        <div className={slide3 + ' slide3'}>
+          <Header />
           <Row>
             <Col xs= "12" md="12" lg="12">
               <div className="card-container p-2">
                 {isStarted && <Timer />}
-                <Button onClick={returnToIntro} className="fullw btnstart" variant="success" value="1" type="button">Return</Button>
+                <button onClick={returnToIntro} className="fullw  btn-base btn-orange" variant="success" value="1" type="button">Restart</button>
               </div>
             </Col>
           </Row>
-        </div>
+          <Exercise getExercise={randomExercise} penalty={penalty} isRunning={isRunning} />
+          <Row>
+            <Col xs="12" md="12" lg="12">
+              <div className="card-container bg-w p-2 mv-2">
+                {answer && <div className={(penalty > 0 ? 'alert-result error': 'alert-result')}>
+                  <p>{answer}</p>
+                  <button onClick={nextExercise} className="fullw  btn-base btn-dark" value="1" type="button">Next Challenge</button>
+                </div>}
+              </div>
+            </Col>
+          </Row>
       </div>
+    </div>
     </Container>
   )
 }

@@ -29,7 +29,7 @@ const Timer = () => {
   }
 
   return (
-    <div className="timer">
+    <div className="timer mv-3">
       <span>Workout Time: {getRealTime(seconds)}</span>
     </div>
   )

@@ -14,7 +14,7 @@ body {
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-ubuntu);
   font-size: min(max(16px, 4vw), 22px);
 }
 
@@ -24,6 +24,7 @@ a {
 
 .wrapper {
   height: 100vh;
+  overflow: hidden;
   position: relative;
 }
 
@@ -48,8 +49,8 @@ a {
 
 .card-container {
   border: 1px solid var(--color-lightgray);
-  border-left: 2px solid var(--color-orange);
-  box-shadow: 10px 24px 34px -26px rgba(0,0,0,0.75)
+  border-left: 2px solid var(--color-salmon);
+  box-shadow: 2px 9px 14px -9px rgba(0,0,0,0.75);
 }
 
 .info-bl {
@@ -60,7 +61,7 @@ a {
 }
 
 .info-bl a {
-  color: var(--color-gray);
+  color: var(--color-darkblue);
 }
 
 .info-bl a:hover {
@@ -157,6 +158,7 @@ a {
 .calculation {
   font-family: var(--font-ubuntu);
   font-size: 1.5rem;
+  font-weight: 800;
   margin: 0;
   text-align: center;
 }
@@ -178,13 +180,14 @@ a {
   font-weight: 600;
   flex: 1;
   font-size: 1.5rem;
-  text-shadow: 0 -1px 4px var(--color-white), 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
   margin: 5px;
 }
 
 .response button:focus,
+.response button:hover,
 .response button:active {
-  background: var(--color-salmon);
+  background: var(--color-orange);
+  border: none;
 }
 
 .hidden {
@@ -193,7 +196,9 @@ a {
 }
 
 .small-title {
-  color: var(--color-gray);
+  color: var(--color-darkblue);
+  font-family: var(--font-ubuntu);
+  font-size: .9rem;
   margin: 0;
 }
 
@@ -206,35 +211,53 @@ a {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .levels button {
   border: 1px solid var(--color-lightgray);
-  background-color: var(--color-salmon);
+  color: var(--color-darkblue);
   font-family: var(--font-ubuntu);
   font-size: 1.5rem;
-  height: 60px;
+  flex: auto;
+  height: 50px;
   width: 100%;
 }
 
-.levels button:nth-last-of-type(5) {
-  background-color: #e06565;
-}
-
-.levels button:nth-last-of-type(4) {
-  background-color: #d15e5e;
-}
-
-.levels button:nth-last-of-type(3) {
-  background-color: #ba4747;
+.levels button:nth-last-of-type(1) {
+  background-color: #ba1818;
+  border-color: #ba1818;
 }
 
 .levels button:nth-last-of-type(2) {
-  background-color: #ad3232;
+  background-color: #ff391f;
+  border-color: #ff391f;
 }
 
-.levels button:nth-last-of-type(1) {
-  background-color: #a82222;
+.levels button:nth-last-of-type(3) {
+  background-color: #ff731f;
+  border-color: #ff731f;
+}
+
+.levels button:nth-last-of-type(4) {
+  background-color: #ffb31f;
+  border-color: #ffb31f;
+}
+
+.levels button:nth-last-of-type(5) {
+  background-color: #f0e52d;
+  border-color: #f0e52d;
+}
+
+.btn-level {
+  transition: all 200ms linear;
+}
+
+.btn-level:focus,
+.btn-level:active,
+.btn-level:hover {
+  color: var(--color-white);
+  transform: scale(1.01);
 }
 
 .label-header {
@@ -273,7 +296,7 @@ a {
 }
 
 .exercise-images {
-  min-height: 160px;
+  min-height: 210px;
   margin-bottom: 10px;
   position: relative;
 }
@@ -306,7 +329,7 @@ a {
 }
 
 .reps-label {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
@@ -322,9 +345,9 @@ a {
   background: var(--color-lightgray);
   color: var(--color-darkblue);
   display: flex;
+  flex-flow: column wrap;
   font-weight: 600;
   font-size: 1.2rem;
-  height: 55px;
   justify-content: space-between;
   width: 100%;
 }
@@ -342,22 +365,20 @@ a {
   height: 100%;
 }
 
-.btn.btnstart {
-  font-family: var(--font-ubuntu);
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-}
-
 .timer {
   color: var(--color-salmon);
   font-family: var(--font-ubuntu);
   font-weight: bold;
+  text-align: center;
+}
+
+.timer span {
+  font-size: 1.2rem;
 }
 
 @media screen and (min-width: 1024px) {
   .calculation {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .title {
@@ -383,7 +404,7 @@ a {
   }
 
   .response button {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .music {
@@ -396,7 +417,7 @@ a {
   }
 
   .exercise-images {
-    height: 150px;
+    min-height: 180px;
     margin-bottom: 0px;
   }
 
@@ -408,17 +429,22 @@ a {
     width: auto;
   }
 
+  .levels {
+    flex-flow: row wrap;
+  }
+
   .levels button {
     font-size: 1rem;
+    flex: 1;
     height: 50px;
   }
 
-  .btn.btnstart {
-    font-size: 1rem;
+  .exercise-info {
+    min-height: 180px;
   }
 
-  .exercise-info {
-    min-height: 150px;
+  .exercise-info h2 {
+    font-size: 1.2rem;
   }
 
 }
